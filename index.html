@@ -1,0 +1,330 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>کتاب جادویی استیو | رُهام پویان‌مهر</title><style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;color:#fff}body{background:radial-gradient(ellipse at 50% 20%,#49247f,#160e37 65%,#08091e);overflow-x:hidden}.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffffffaa 1px,transparent 2px),radial-gradient(#c49fff88 1px,transparent 2px);background-size:81px 89px,137px 127px;animation:none}@keyframes star{to{background-position:130px 200px,-80px 120px}}header{position:relative;text-align:center;padding:14px 10px 4px;font-weight:bold;color:#ffe4a2;text-shadow:0 2px 10px #9a51ff}header small{display:block;font-size:12px;color:#d7c8f4;margin-top:5px}.main{position:relative;display:flex;justify-content:center;align-items:center;padding:10px 14px 4px;perspective:1800px}.book{position:relative;width:min(96vw,580px);height:min(73vh,780px);min-height:420px;filter:drop-shadow(0 20px 25px #0009);transform-style:preserve-3d}.page{position:absolute;inset:0;background:linear-gradient(120deg,#fff7df,#f4dca7);border:7px solid #aa6a2d;border-radius:9px 20px 20px 9px;overflow:hidden;backface-visibility:hidden;transform-origin:right center;box-shadow:inset -10px 0 16px #946a3e55,0 4px 9px #0007;display:flex;flex-direction:column}.page::before{content:'';position:absolute;inset:0;border:2px solid #e7bc64;pointer-events:none;z-index:4}.page.full img{height:100%;width:100%;object-fit:contain;background:#1b1238}.page.story .illustration{height:59%;min-height:0;overflow:hidden;position:relative;background:#26143c}.page.story .illustration img{width:100%;height:100%;object-fit:contain;object-position:center;background:#201334}.page.story .content{flex:1;min-height:0;overflow:auto;padding:12px 21px 20px;color:#39234e;text-align:right;direction:rtl;scrollbar-width:thin}.page.story h2{font-size:clamp(16px,2.5vw,22px);margin:2px 0 12px;text-align:center;color:#6e258b}.page.story p{font-size:clamp(14px,2.15vw,18px);line-height:1.75;white-space:pre-line;margin:0;font-weight:600}.page.story .num{position:absolute;bottom:7px;left:15px;font-size:11px;color:#856638}.page.enter{animation:enter .75s ease both}.page.leaveNext{animation:flipNext .75s ease both;z-index:30!important}.page.leavePrev{animation:flipPrev .75s ease both;z-index:30!important}@keyframes flipNext{0%{transform:rotateY(0)}100%{transform:rotateY(105deg);opacity:.05}}@keyframes flipPrev{0%{transform:rotateY(0)}100%{transform:rotateY(-105deg);opacity:.05}}@keyframes enter{from{opacity:.65;transform:scale(.97)}to{opacity:1;transform:scale(1)}}.controls{position:relative;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;padding:12px 8px 20px}button{border:1px solid #e7b958;border-radius:12px;background:linear-gradient(#7c3bb5,#4e207b);color:white;font-size:14px;font-weight:bold;padding:11px 14px;cursor:pointer;box-shadow:0 4px 0 #2c1248}button:active{transform:translateY(3px);box-shadow:0 1px 0 #2c1248}button:disabled{opacity:.35;cursor:default}.counter{font-size:13px;color:#ffdf9d;min-width:75px;text-align:center}.hint{text-align:center;color:#d9c4f4;font-size:12px;padding:0 10px 15px}.spark{position:fixed;top:30%;left:15%;font-size:28px;animation:glow 3s ease-in-out infinite;pointer-events:none}@keyframes glow{50%{opacity:.25;transform:translateY(-16px) rotate(30deg)}}@media(max-height:650px){header{padding:4px}header small{display:none}.book{height:72vh;min-height:300px}.controls{padding:7px}.page.story .illustration{height:52%}.page.story .content{padding:7px 13px}.page.story p{font-size:13px;line-height:1.55}}@media(prefers-reduced-motion:reduce){.stars,.spark{animation:none}.page.leaveNext,.page.leavePrev,.page.enter{animation-duration:.01s}}
+
+/* جلد بسته و باز شدن تعاملی */
+.book.closed{width:min(72vw,410px);height:min(69vh,650px);min-height:340px;transform:rotate(0deg) rotateY(0deg);transition:transform 1s ease,width .8s ease,height .8s ease;cursor:pointer}
+.book.closed::after{content:"👆 برای باز کردن کتاب روی جلد بزن!";position:absolute;bottom:-47px;right:0;left:0;text-align:center;font-size:15px;color:#ffe7a7;text-shadow:0 2px 7px #000;animation:pulse 1.8s ease-in-out infinite}
+.book.closed .page{border:11px solid #9a5c22;border-left:19px solid #e3bd77;box-shadow:inset -8px 0 18px #0005,8px 8px 0 #eee0bc,13px 13px 0 #b68b53,19px 20px 25px #000a}
+.book.opening{transform:rotateY(-30deg) scale(1.02)!important}
+.book.closed + *{pointer-events:none}
+@keyframes pulse{50%{opacity:.5;transform:translateY(-4px)}}
+@media(max-width:480px){.book.closed{height:62vh;min-height:320px}.book.closed::after{font-size:12px}}
+
+/* پایان داستان: بسته شدن کتاب و نمایش پشت جلد */
+.book.ending{width:min(72vw,410px);height:min(69vh,650px);min-height:340px;transform:rotate(0deg) rotateY(0deg);transition:transform .9s ease,width .9s ease,height .9s ease;cursor:pointer}
+.book.ending .page{border:11px solid #9a5c22;border-left:19px solid #e3bd77;box-shadow:inset -8px 0 18px #0005,8px 8px 0 #eee0bc,13px 13px 0 #b68b53,19px 20px 25px #000a}
+.book.closing{transform:rotateY(75deg) scale(.88);transition:transform .65s ease}
+.book.ending::after{content:"پایان داستان ✨  برای خواندن دوباره روی کتاب بزن";position:absolute;bottom:-52px;right:0;left:0;text-align:center;font-size:13px;color:#ffe7a7;text-shadow:0 2px 7px #000}
+@media(max-width:480px){.book.ending{height:62vh;min-height:320px}}
+
+
+/* Cinematic edition */
+.page.story .illustration{height:63%;isolation:isolate}
+.page.story .illustration img{animation:cinematicPan 15s ease-in-out infinite alternate}
+@keyframes cinematicPan{from{transform:scale(1.01) translate(-.4%,0)}to{transform:scale(1.065) translate(.5%,-.6%)}}
+.page.story .content{padding:9px 20px 13px;background:linear-gradient(130deg,#fff5d8,#f4dba9)}
+.page.story h2{margin:0 0 6px;font-size:clamp(15px,2.4vw,20px)}
+.page.story p{font-size:clamp(13px,2vw,17px);line-height:1.6}
+.page.story .content{animation:revealWriting .95s ease both}
+@keyframes revealWriting{from{opacity:.05;filter:blur(4px);transform:translateY(10px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+.book.closed:before{content:'✦';position:absolute;inset:-22px;z-index:8;pointer-events:none;display:grid;place-items:center;color:#e9b3ff;font-size:58px;text-shadow:0 0 22px #bd4aff,0 0 50px #aa55ff;animation:magicAura 2.2s ease-in-out infinite}
+@keyframes magicAura{50%{opacity:.4;transform:scale(1.18)}}
+.book.opening:before{content:'✧ ✦ ✧';position:absolute;inset:0;z-index:50;display:grid;place-items:center;color:white;font-size:56px;text-shadow:0 0 30px #d68aff;animation:burst .55s ease-out both;pointer-events:none}
+@keyframes burst{to{opacity:0;transform:scale(2)}}
+.book.ending:before{content:'✦ ✧ ✦';position:absolute;inset:-14px;z-index:8;pointer-events:none;display:grid;place-items:center;font-size:35px;color:#ffe59a;text-shadow:0 0 22px gold;animation:magicAura 3s ease-in-out infinite}
+.controls button.active{background:linear-gradient(#b776e7,#62218f);border-color:#ffe6a0}
+#sceneHint{text-align:center;font-size:12px;color:#ffdfa5;min-height:18px;margin-top:2px}
+@media(max-width:480px){.page.story .illustration{height:58%}.page.story p{font-size:13px;line-height:1.48}.page.story .content{padding:7px 13px}.controls{gap:5px}.controls button{font-size:12px;padding:9px 10px}}
+@media(prefers-reduced-motion:reduce){.page.story .illustration img,.book.closed:before,.book.ending:before{animation:none}}
+
+/* Pages 2, 5, 6: fit the complete story without scrolling */
+.page.story.compact-story .illustration{height:47%;flex-shrink:0}
+.page.story.compact-story .content{overflow:hidden;padding:5px 12px 8px}
+.page.story.compact-story h2{font-size:clamp(12px,2vw,17px);margin:0 0 3px}
+.page.story.compact-story p{font-size:clamp(11px,1.65vw,14px);line-height:1.37;font-weight:600}
+@media(max-width:480px){.page.story.compact-story .illustration{height:40%}.page.story.compact-story .content{padding:4px 9px 6px}.page.story.compact-story h2{font-size:12px;margin-bottom:2px}.page.story.compact-story p{font-size:11px;line-height:1.32}}
+
+@media (hover:none),(max-width:900px){
+ .page.story .illustration img{animation:none!important}
+ .stars,.spark{animation:none!important}
+ .book.closed::after,.book.closed::before,.book.ending::before{animation:none!important}
+ .book{filter:none;box-shadow:0 16px 28px #0008}
+ #resumeOverlay{backdrop-filter:none}
+}
+</style>
+<style>
+/* متن خوانا، بدون نیاز به اسکرول در صفحات داستانی ۲، ۵ و ۶ */
+.page.story.compact-story .illustration{height:34%;flex-shrink:0}
+.page.story.compact-story .content{overflow:hidden;padding:10px 20px 12px}
+.page.story.compact-story h2{font-size:clamp(16px,2.3vw,20px);margin:0 0 8px}
+.page.story.compact-story p{font-size:18px;line-height:1.55;font-weight:600}
+@media(max-width:480px){
+ .page.story.compact-story .illustration{height:30%}
+ .page.story.compact-story .content{padding:8px 14px 10px}
+ .page.story.compact-story h2{font-size:16px;margin-bottom:6px}
+ .page.story.compact-story p{font-size:16px;line-height:1.48}
+}
+</style>
+<style>
+/* پشت جلد فقط هنگام چرخاندن به سمت پشت دیده می‌شود؛ پشت‌تصویر اضافی حذف شد */
+#book::before{display:none!important}
+#book.show-real-back::before{display:block!important;z-index:60!important;transform:translateZ(2px) rotateY(180deg)!important}
+#book.show-real-back .page{visibility:hidden!important}
+#book:not(.rotation-mode)::after{display:none!important}
+</style><style>.music-control{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center}.music-volume{display:inline-flex;align-items:center;gap:7px;border:1px solid #e7b958;border-radius:12px;background:#4e207b;color:#fff;padding:7px 10px;font-size:13px;font-weight:bold;direction:ltr}.music-volume input{width:110px;accent-color:#f5cb76;cursor:pointer}.music-volume output{min-width:35px;text-align:center;direction:rtl;font-variant-numeric:tabular-nums}@media(max-width:600px){.music-volume input{width:90px}}</style></head><body><div class="stars"></div><div class="spark">✦</div><header>📖 کتاب جادویی استیو <small>داستان تصویری کلاس پنجم شهریار · تهیه‌کننده: رُهام پویان‌مهر</small></header><div class="main"><div id="book" class="book closed" role="button" tabindex="0" aria-label="برای باز کردن کتاب روی جلد بزن" aria-live="polite"></div></div><div class="controls"><button id="next">صفحه بعد ❮</button><span class="counter" id="counter"></span><button id="prev">❯ صفحه قبل</button><span class="music-control"><button id="music">♫ موسیقی: خاموش</button><label class="music-volume" for="musicVolume">🔊 <input id="musicVolume" type="range" min="0" max="100" step="1" value="80" aria-label="بلندی صدای موسیقی"><output id="musicVolumeValue" for="musicVolume">۸۰٪</output></label></span><button id="narrate" aria-pressed="false">🎙 راوی فارسی</button><button id="auto" aria-pressed="false">▶ نمایش خودکار</button><button id="full">⛶ تمام‌صفحه</button></div><div id="sceneHint" aria-live="polite"></div><div class="hint">با دکمه‌ها یا کلیدهای جهت‌دار کتاب را ورق بزن. موسیقی با لمس دکمه فعال می‌شود.</div><script>
+const IMAGES={"1000025746.png": "./image-01.webp", "1000025774.jpg": "./image-01.webp", "1000025768.png": "./image-02.webp", "1000025795.png": "./image-03.webp", "1000025750.png": "./image-04.webp", "1000025792.png": "./image-05.webp", "1000025793.png": "./image-06.webp", "1000025796.jpg": "./image-02.webp", "1000025761.png": "./image-07.webp", "1000025794.png": "./image-08.webp", "1000025798.jpg": "./image-03.webp"};const PAGES=[{"image":"1000025746.png","type":"full","title":"جلد","music":0},{"image":"1000025774.jpg","type":"full","title":"مشخصات کتاب","music":1},{"image":"1000025768.png","type":"story","title":"صفحه اول · معرفی استیو","text":"روزی روزگاری، در دنیای زیبای ماینکرفت، استیو در دهکده‌ای کوچک زندگی می‌کرد.\nاو عاشق ماجراجویی، ساختن خانه و پیدا کردن الماس بود، اما علاقه زیادی به کتاب خواندن نداشت.\nیک روز هنگام گردش در دهکده، کتابخانه‌ای کوچک و زیبا پیدا کرد.","music":2},{"image":"1000025795.png","type":"story","title":"صفحه دوم · کتاب جادویی","text":"استیو وارد کتابخانه شد و ویلیجر پیری را دید.\nویلیجر به او گفت: «استیو! دوست داری یک کتاب جادویی داشته باشی؟»\nاستیو با تعجب گفت: «مگر کتاب هم جادو دارد؟»\nویلیجر لبخند زد و کتابی به او داد.\nاستیو کتاب را باز کرد. در صفحه اول نوشته شده بود:\n«برای پیدا کردن بزرگ‌ترین گنج ماینکرفت، باید از سه مرحله عبور کنی.»","music":3},{"image":"1000025750.png","type":"full","title":"میان‌صفحه · دهکده ماینکرفت","music":4},{"image":"1000025792.png","type":"story","title":"صفحه سوم · عبور از رودخانه","text":"استیو با هیجان راه افتاد تا گنج را پیدا کند.\nپس از کمی پیاده‌روی به رودخانه‌ای بزرگ رسید، اما هیچ پلی وجود نداشت!\nاستیو کتاب را باز کرد و یاد گرفت چگونه با چوب یک پل بسازد.\nاو با خوشحالی پل را ساخت و از رودخانه عبور کرد.","music":5},{"image":"1000025793.png","type":"story","title":"صفحه چهارم · مشعل در غار","text":"استیو به غاری تاریک رسید. داخل غار آن‌قدر تاریک بود که نمی‌توانست چیزی ببیند.\nاو دوباره کتاب را باز کرد و یاد گرفت چگونه با چوب و زغال‌سنگ مشعل درست کند.\nاستیو مشعلی ساخت و غار را روشن کرد.\nسپس با شجاعت از غار عبور کرد و به قلعه‌ای بزرگ رسید.","music":6},{"image":"1000025796.jpg","type":"full","title":"میان‌صفحه · استیو در حال نوشتن","music":8},{"image":"1000025761.png","type":"story","title":"صفحه پنجم · صندوق گنج","text":"استیو وارد قلعه شد و صندوقی بزرگ پیدا کرد.\nبا خوشحالی گفت: «بالاخره گنج را پیدا کردم!»\nاما وقتی صندوق را باز کرد، هیچ الماس یا زمردی داخل آن نبود!\nفقط یک کتاب کوچک پیدا کرد که روی آن نوشته شده بود:\n«دانایی گنجی است که هیچ‌وقت تمام نمی‌شود.»\nاستیو با تعجب به کتاب نگاه کرد.","music":7},{"image":"1000025794.png","type":"story","title":"صفحه ششم · گنج واقعی","text":"استیو کمی فکر کرد و فهمید که بدون کمک کتاب نمی‌توانست از رودخانه و غار عبور کند.\nاو فهمید که کتاب‌ها می‌توانند چیزهای زیادی به ما یاد بدهند.\nاستیو به دهکده برگشت و تصمیم گرفت هر روز کتاب بخواند.\nاو حتی یک کتابخانه بزرگ برای تمام ویلیجرها ساخت!\nاز آن روز به بعد، استیو فهمید که ارزش دانایی از یک صندوق پر از الماس هم بیشتر است.","music":9},{"image":"1000025798.jpg","type":"full","title":"صفحه پایانی · استیو و هاپو","music":9}];let current=0,busy=false,opened=false;const book=document.getElementById('book'),counter=document.getElementById('counter');function pageNode(i){const p=PAGES[i],el=document.createElement('section');el.className='page '+p.type;if([3,8,9].includes(i))el.classList.add('compact-story');el.setAttribute('aria-label',p.title);if(p.type==='full'){const im=new Image();im.decoding='async';im.src=IMAGES[p.image];im.alt=p.title;el.append(im)}else{const ill=document.createElement('div');ill.className='illustration';const im=new Image();im.decoding='async';im.src=IMAGES[p.image];im.alt=p.title;ill.append(im);const c=document.createElement('div');c.className='content';const h=document.createElement('h2');h.textContent=p.title;const txt=document.createElement('p');txt.textContent=p.text;c.append(h,txt);el.append(ill,c)}if(p.type==='story'&&[3,8,9].includes(i)){requestAnimationFrame(()=>{const c=el.querySelector('.content'),t=el.querySelector('p');if(!c||!t)return;let size=parseFloat(getComputedStyle(t).fontSize);while(c.scrollHeight>c.clientHeight+1&&size>13){size-=.25;t.style.fontSize=size+'px';}if(c.scrollHeight>c.clientHeight+1){const ill=el.querySelector('.illustration');while(c.scrollHeight>c.clientHeight+1&&parseFloat(ill.style.height||getComputedStyle(ill).height)>0){let h=ill.getBoundingClientRect().height; if(h<65)break;ill.style.height=(h-5)+'px';}}})}return el}let preloadImage=null;
+function prefetchNext(){const next=PAGES[Math.min(current+1,PAGES.length-1)];if(!next)return;preloadImage=new Image();preloadImage.decoding='async';preloadImage.src=IMAGES[next.image]}
+function status(){prefetchNext();counter.textContent=(current+1)+' / '+PAGES.length;document.getElementById('prev').disabled=!opened||current===0;document.getElementById('next').disabled=!opened||current===PAGES.length-1}function flip(delta){if(window.narrationLocked&&!window.narrationAdvancing)return;if(!opened||busy||current+delta<0||current+delta>=PAGES.length)return;
+if(current===PAGES.length-2&&delta===1){closeAtEnd();return}
+if(current===PAGES.length-1&&delta===-1){book.classList.remove('ending');}
+busy=true;const old=book.firstElementChild;const next=pageNode(current+delta);next.style.zIndex='1';book.insertBefore(next,old);old.classList.add(delta>0?'leaveNext':'leavePrev');playFlip();setTimeout(()=>{old.remove();next.classList.add('enter');current+=delta;status();resetTheme();busy=false},740)}function closeAtEnd(){if(busy)return;busy=true;book.classList.add('closing');playFlip();setTimeout(()=>{book.replaceChildren(pageNode(PAGES.length-1));current=PAGES.length-1;book.classList.remove('closing');book.classList.add('ending');status();resetTheme();busy=false},650)}
+book.append(pageNode(0));status();
+function openBook(){if(opened||busy)return;opened=true;book.classList.add('opening');book.classList.remove('closed');book.removeAttribute('role');book.removeAttribute('tabindex');setTimeout(()=>{book.classList.remove('opening');flip(1)},520)}
+book.addEventListener('click',()=>{if(window.narrationLocked)return;if(!opened)openBook();else if(book.classList.contains('ending')){book.classList.remove('ending','closing','opening');book.classList.add('closed');book.replaceChildren(pageNode(0));current=0;opened=false;busy=false;status();resetTheme();book.setAttribute('role','button');book.setAttribute('tabindex','0');book.setAttribute('aria-label','برای باز کردن کتاب روی جلد بزن')}});
+book.addEventListener('keydown',e=>{if(!opened&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openBook()}});
+document.getElementById('next').onclick=()=>{if(!opened)openBook();else flip(1)};document.getElementById('prev').onclick=()=>flip(-1);document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){if(!opened)openBook();else flip(1)};if(e.key==='ArrowRight')flip(-1)});let touchX=0;book.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});book.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchX;if(Math.abs(dx)>55)flip(dx<0?1:-1)},{passive:true});document.getElementById('full').onclick=()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}else document.exitFullscreen?.()};
+let audioCtx=null,musicTimer=null,musicOn=false,step=0,activeNodes=[];
+let musicLevel=.80;
+const musicVolume=document.getElementById("musicVolume"),musicVolumeValue=document.getElementById("musicVolumeValue");
+function musicAmplitude(){return musicLevel*(typeof narrating!=="undefined"&&narrating?.40:1)}
+musicVolume.addEventListener("input",()=>{musicLevel=Number(musicVolume.value)/100;musicVolumeValue.textContent=Number(musicVolume.value).toLocaleString("fa-IR")+"٪"});
+function ctx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}
+const themes=[
+{root:0,notes:[0,4,7,12,7,4,2,7],tempo:330,wave:'triangle'},
+{root:5,notes:[0,2,4,7,4,2,0,-3],tempo:400,wave:'sine'},
+{root:0,notes:[0,4,7,9,7,4,2,4],tempo:285,wave:'triangle'},
+{root:7,notes:[0,3,7,12,10,7,3,0],tempo:340,wave:'sine'},
+{root:0,notes:[0,2,4,7,9,7,4,2],tempo:300,wave:'triangle'},
+{root:2,notes:[0,2,5,7,9,7,5,2],tempo:230,wave:'square'},
+{root:-3,notes:[0,3,5,7,5,3,0,-2],tempo:385,wave:'triangle'},
+{root:5,notes:[0,4,7,12,11,7,4,2],tempo:260,wave:'triangle'},
+{root:0,notes:[0,2,4,7,12,7,4,2],tempo:325,wave:'sine'},
+{root:0,notes:[0,4,7,12,16,12,7,4],tempo:420,wave:'triangle'}];
+function tone(midi,when,dur,vol,type='sine'){
+ const a=ctx(),osc=a.createOscillator(),gain=a.createGain();osc.type=type;
+ osc.frequency.setValueAtTime(440*Math.pow(2,(midi-69)/12),when);
+ gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,vol*musicAmplitude()*7),when+.035);
+ gain.gain.exponentialRampToValueAtTime(.0001,when+dur);
+ osc.connect(gain).connect(a.destination);osc.start(when);osc.stop(when+dur+.03);
+ activeNodes.push(gain);osc.onended=()=>{activeNodes=activeNodes.filter(x=>x!==gain)};
+}
+function musicTick(){if(!musicOn)return;const theme=themes[current],t=ctx().currentTime+.025,k=step%16;
+ const root=57+theme.root,n=theme.notes[k%8]+(k>=8?0:0);
+ tone(root+n,t,theme.tempo/1000*.85,.045,theme.wave);
+ if(k%2===0)tone(root+n+12,t+.06,.12,.010,'sine');
+ if(k%4===0){tone(root-12+(k>=8?5:0),t,theme.tempo/1000*3.5,.022,'sine');tone(root+7,t,theme.tempo/1000*2.5,.011,'triangle')}
+ if(k%8===7)tone(root+12,t+.09,.26,.017,'sine');step++;
+}
+function resetTheme(){step=0;if(musicOn){clearInterval(musicTimer);activeNodes.forEach(g=>{try{g.gain.setTargetAtTime(.0001,ctx().currentTime,.03)}catch(e){}});musicTick();musicTimer=setInterval(musicTick,themes[current].tempo)}}
+document.getElementById('music').onclick=()=>{musicOn=!musicOn;const b=document.getElementById('music');if(musicOn){ctx();resetTheme();b.textContent='♫ موسیقی: روشن'}else{clearInterval(musicTimer);activeNodes.forEach(g=>{try{g.gain.setTargetAtTime(.0001,ctx().currentTime,.02)}catch(e){}});b.textContent='♫ موسیقی: خاموش'}};
+function playFlip(){if(!audioCtx)return;const a=ctx(),len=Math.floor(a.sampleRate*.12),buf=a.createBuffer(1,len,a.sampleRate),data=buf.getChannelData(0);for(let i=0;i<len;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);const src=a.createBufferSource(),g=a.createGain();src.buffer=buf;g.gain.value=.045;src.connect(g).connect(a.destination);src.start()}
+</script>
+<script>
+(()=>{
+const AUDIO_TRACKS={"2":"./audio-01.mp3","3":"./audio-02.mp3","5":"./audio-03.mp3","6":"./audio-04.mp3","8":"./audio-05.mp3","9":"./audio-06.mp3"};
+const narrateButton=document.getElementById('narrate'),autoButton=document.getElementById('auto'),sceneLabel=document.getElementById('sceneHint');
+const scenes=['آغاز جادویی','معرفی کتاب','دهکده آرام','راز کتاب جادویی','آرامش مزرعه','ماجراجویی رودخانه','غار و نور مشعل','لحظه‌ای برای نوشتن','کشف صندوق گنج','پیروزی دانایی','پشت جلد و پایان'];
+const voice=new Audio();voice.preload='none';voice.volume=1;
+let narrating=false,normalAuto=false,normalTimer=null,narrationTimer=null,lastPage=-1,serial=0;
+window.narrationLocked=false;window.narrationAdvancing=false;
+function clearTimers(){clearTimeout(normalTimer);clearTimeout(narrationTimer)}
+function updateControls(){
+ narrateButton.classList.toggle('active',narrating);
+ narrateButton.textContent=narrating?'🎙 راوی: روشن (آران پارسی)':'🎙 راوی فارسی';
+ narrateButton.setAttribute('aria-pressed',String(narrating));
+ autoButton.disabled=narrating;autoButton.title=narrating?'نمایش خودکار با راوی کنترل می‌شود':'';
+ const prev=document.getElementById('prev'),next=document.getElementById('next');
+ if(narrating){prev.disabled=true;next.disabled=true;prev.title=next.title='هنگام پخش راوی، ورق‌زدن خودکار است'}
+ else {prev.title=next.title='';status()}
+ autoButton.classList.toggle('active',normalAuto||narrating);
+ autoButton.textContent=narrating?'⏸ نمایش خودکار با راوی':normalAuto?'⏸ توقف نمایش':'▶ نمایش خودکار';
+ autoButton.setAttribute('aria-pressed',String(normalAuto||narrating));
+}
+function finishNarration(){narrating=false;window.narrationLocked=false;window.narrationAdvancing=false;serial++;clearTimers();voice.pause();voice.removeAttribute('src');updateControls()}
+function goNextNarrated(){if(!narrating)return;
+ if(current>=PAGES.length-1){finishNarration();return}
+ const token=serial;
+ narrationTimer=setTimeout(()=>{
+  if(!narrating||token!==serial)return;
+  if(busy){goNextNarrated();return}
+  window.narrationAdvancing=true;flip(1);window.narrationAdvancing=false;
+  narrationTimer=setTimeout(()=>{if(narrating&&token===serial){if(busy){narrationTimer=setTimeout(playNarratedPage,250)}else playNarratedPage()}},950);
+ },350);
+}
+function playNarratedPage(){if(!narrating)return;
+ clearTimeout(narrationTimer);
+ if(busy){narrationTimer=setTimeout(playNarratedPage,200);return}
+ sceneLabel.textContent=scenes[current]||'';
+ voice.pause();voice.onended=null;voice.onerror=null;
+ const source=AUDIO_TRACKS[current];
+ if(source){
+  voice.src=source;voice.currentTime=0;
+  const token=serial;
+  voice.onended=()=>{if(narrating&&token===serial)goNextNarrated()};
+  voice.onerror=()=>{sceneLabel.textContent='پخش این بخش ممکن نشد؛ برای ادامه راوی را خاموش و روشن کنید.'};
+  const attempt=voice.play();
+  if(attempt&&attempt.catch)attempt.catch(()=>{if(narrating)sceneLabel.textContent='برای فعال شدن صدا، یک‌بار راوی را خاموش و دوباره روشن کنید.'});
+ }else{
+  if(current===PAGES.length-1){narrationTimer=setTimeout(finishNarration,3500);return}
+  narrationTimer=setTimeout(goNextNarrated,current===0?1000:current===1?2600:3400);
+ }
+ updateControls();
+}
+narrateButton.addEventListener('click',()=>{
+ if(narrating){finishNarration();return}
+ normalAuto=false;clearTimers();narrating=true;window.narrationLocked=true;serial++;
+ updateControls();
+ if(!opened){
+  // Opening cover uses original animation; the first narration begins after credits.
+  window.narrationLocked=false;openBook();window.narrationLocked=true;
+  narrationTimer=setTimeout(playNarratedPage,1550);
+ }else playNarratedPage();
+});
+function scheduleNormalAuto(){clearTimeout(normalTimer);if(!normalAuto||narrating)return;
+ if(!opened){openBook();normalTimer=setTimeout(scheduleNormalAuto,1600);return}
+ if(current===PAGES.length-1){normalAuto=false;updateControls();return}
+ const p=PAGES[current],ms=p.text?Math.max(11000,Math.min(26000,p.text.length*125)):5500;
+ normalTimer=setTimeout(()=>{if(normalAuto&&!narrating){if(!busy)flip(1);normalTimer=setTimeout(scheduleNormalAuto,1050)}},ms);
+}
+autoButton.addEventListener('click',()=>{if(narrating)return;normalAuto=!normalAuto;updateControls();if(normalAuto){if(!musicOn)document.getElementById('music').click();scheduleNormalAuto()}else clearTimeout(normalTimer)});
+function onPage(){if(lastPage===current)return;lastPage=current;sceneLabel.textContent=scenes[current]||'';if(narrating)updateControls();else if(normalAuto)scheduleNormalAuto()}
+const obs=new MutationObserver(()=>{if(!busy)onPage()});obs.observe(book,{childList:true,attributes:true,attributeFilter:['class']});
+
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&narrating){voice.pause()}else if(!document.hidden&&narrating&&AUDIO_TRACKS[current]&&voice.paused&&!voice.ended){voice.play().catch(()=>{})}});
+book.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||book.classList.contains('rotation-mode')||busy||!opened||book.classList.contains('ending'))return;const el=book.querySelector('.illustration img');if(!el)return;const r=book.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`scale(1.045) translate(${x*1.3}%,${y*.9}%)`});
+book.addEventListener('pointerleave',()=>{const el=book.querySelector('.illustration img');if(el)el.style.transform=''});
+updateControls();onPage();
+})();
+</script>
+
+<style>
+#closeBook,#rotateBook{border-color:#ffe1a0}
+#rotateBook.active{background:linear-gradient(#be79df,#65339a)}
+#resumeOverlay{position:fixed;inset:0;background:#090519c9;z-index:999;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}
+#resumeOverlay.show{display:flex}
+#resumePanel{width:min(92vw,390px);background:linear-gradient(145deg,#47236f,#22133e);border:2px solid #dca65d;border-radius:19px;padding:22px 16px;text-align:center;box-shadow:0 15px 60px #000a}
+#resumePanel h3{color:#ffe6a2;margin:0 0 9px;font-size:21px}
+#resumePanel p{font-size:13px;color:#eee0ff;margin:0 0 18px}
+#resumePanel button{margin:5px;min-width:125px}
+#book.rotation-mode{touch-action:none;cursor:grab}
+#book.rotation-mode:active{cursor:grabbing}
+#book.rotation-mode .page{pointer-events:none}
+#book::before{content:"";position:absolute;inset:0;z-index:-1;transform:translateZ(-18px) rotateY(180deg);backface-visibility:hidden;background-image:var(--back-image);background-size:100% 100%;background-position:center;border:7px solid #885020;border-radius:20px 9px 9px 20px;box-shadow:0 8px 28px #0009}
+#book::after{content:"";position:absolute;left:0;top:2%;width:18px;height:96%;background:repeating-linear-gradient(to bottom,#e8d7b0 0 2px,#c7ad79 2px 3px);transform:translateX(-9px) rotateY(-90deg);transform-origin:center;backface-visibility:visible;box-shadow:inset 2px 0 5px #6c431d;pointer-events:none}
+#book.rotation-mode{transition:none!important}
+#book.rotation-mode .page{backface-visibility:hidden!important}
+</style>
+<div id="resumeOverlay" role="dialog" aria-modal="true" aria-label="انتخاب شروع خواندن">
+ <div id="resumePanel">
+  <h3>📖 کتاب جادویی استیو</h3>
+  <p id="resumeMessage">از کجا بخوانیم؟</p>
+  <button id="resumeContinue">📍 خواندن از ادامه</button>
+  <button id="resumeStart">✨ خواندن از اول</button>
+  <button id="resumeCancel">انصراف</button>
+ </div>
+</div>
+<script>
+(function(){
+const closeBtn=document.createElement('button');
+closeBtn.id='closeBook';closeBtn.textContent='📕 بستن کتاب';
+const rotateBtn=document.createElement('button');
+rotateBtn.id='rotateBook';rotateBtn.textContent='🔄 چرخاندن: خاموش';
+document.querySelector('.controls').append(closeBtn,rotateBtn);
+const overlay=document.getElementById('resumeOverlay');
+const message=document.getElementById('resumeMessage');
+const cont=document.getElementById('resumeContinue');
+let savedPage=1, rotation=false, yaw=0,pitch=0,drag=null,ignoreClick=false,rotationFrame=0;
+const bookEl=document.getElementById('book');
+function stopPlayback(){
+ const narrator=document.getElementById('narrate');
+ if(narrator&&narrator.getAttribute('aria-pressed')==='true')narrator.click();
+ const auto=document.getElementById('auto');
+ if(auto&&auto.getAttribute('aria-pressed')==='true'&&!auto.disabled)auto.click();
+}
+bookEl.style.setProperty('--back-image',`url("${IMAGES[PAGES[PAGES.length-1].image]}")`);
+function setRotation(){bookEl.style.transform=`rotateX(${pitch}deg) rotateY(${yaw}deg)`;const angle=((yaw%360)+360)%360;bookEl.classList.toggle("show-real-back",rotation&&angle>90&&angle<270);}
+function closeNow(){
+ if(typeof busy!=='undefined'&&busy)return;
+ if(typeof opened!=='undefined'&&opened){
+   if(current>0&&current<PAGES.length-1)savedPage=current;
+   else if(current===PAGES.length-1)savedPage=1;
+ }
+ stopPlayback();
+ bookEl.classList.remove('ending','opening','closing');
+ bookEl.classList.add('closed');
+ bookEl.replaceChildren(pageNode(0));
+ current=0;opened=false;busy=false;
+ bookEl.setAttribute('role','button');bookEl.setAttribute('tabindex','0');
+ bookEl.setAttribute('aria-label','باز کردن کتاب');
+ status();resetTheme();
+ overlay.classList.remove('show');
+}
+closeBtn.addEventListener('click',closeNow);
+function showChoices(){
+ if(opened||busy)return;
+ cont.style.display=savedPage>1?'inline-block':'none';
+ message.textContent=savedPage>1?'می‌خواهی از همان صفحه‌ای که ماندی ادامه بدهی؟':'کتاب را از اول شروع کنیم؟';
+ overlay.classList.add('show');
+}
+function openAt(index){
+ overlay.classList.remove('show');
+ if(opened||busy)return;
+ opened=true;busy=true;
+ bookEl.classList.remove('closed','ending');
+ bookEl.classList.add('opening');
+ bookEl.removeAttribute('role');bookEl.removeAttribute('tabindex');
+ setTimeout(()=>{
+  bookEl.replaceChildren(pageNode(index));
+  current=index;busy=false;
+  bookEl.classList.remove('opening');
+  status();resetTheme();
+ },650);
+}
+cont.addEventListener('click',()=>openAt(savedPage));
+document.getElementById('resumeStart').addEventListener('click',()=>{savedPage=1;openAt(1)});
+document.getElementById('resumeCancel').addEventListener('click',()=>overlay.classList.remove('show'));
+overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('show')});
+bookEl.addEventListener('click',e=>{
+ if(ignoreClick){ignoreClick=false;e.stopImmediatePropagation();e.preventDefault();return}
+ if(!opened){e.stopImmediatePropagation();e.preventDefault();showChoices();}
+},true);
+bookEl.addEventListener('keydown',e=>{
+ if(!opened&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.stopImmediatePropagation();showChoices()}
+},true);
+rotateBtn.addEventListener('click',()=>{
+ rotation=!rotation;
+ rotateBtn.classList.toggle('active',rotation);
+ rotateBtn.textContent=rotation?'🔄 چرخاندن: روشن':'🔄 چرخاندن: خاموش';
+ bookEl.classList.toggle('rotation-mode',rotation);
+ if(!rotation){yaw=0;pitch=0;bookEl.style.transform='';bookEl.classList.remove('show-real-back');}
+});
+bookEl.addEventListener('pointerdown',e=>{
+ if(!rotation||e.button!==0)return;
+ drag={x:e.clientX,y:e.clientY,yaw,pitch,moved:false};
+ bookEl.setPointerCapture?.(e.pointerId);
+ e.preventDefault();
+},true);
+bookEl.addEventListener('pointermove',e=>{
+ if(!rotation||!drag)return;
+ const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+ if(Math.abs(dx)+Math.abs(dy)>6)drag.moved=true;
+ yaw=drag.yaw+dx*1.15;
+ pitch=Math.max(-70,Math.min(70,drag.pitch-dy*.55));
+ if(!rotationFrame)rotationFrame=requestAnimationFrame(()=>{rotationFrame=0;setRotation()});
+ e.stopImmediatePropagation();
+},true);
+bookEl.addEventListener('pointerup',e=>{
+ if(!rotation||!drag)return;
+ if(drag.moved){ignoreClick=true;setTimeout(()=>{ignoreClick=false},400);}
+ drag=null;
+ e.stopImmediatePropagation();
+},true);
+bookEl.addEventListener('touchend',e=>{
+ if(rotation){e.stopImmediatePropagation();e.preventDefault();}
+}, {capture:true,passive:false});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&overlay.classList.contains('show'))overlay.classList.remove('show');
+});
+})();
+</script>
+</body></html>
